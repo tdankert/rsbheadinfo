@@ -44,8 +44,8 @@ def publish(rstdata):
     informer.publishData(rstdata)
 
 def callback(data):
-    rospy.loginfo(rospy.get_caller_id() + ' Received %s', data.data)
-    rstdata = convert(data.data)
+    rospy.loginfo(rospy.get_caller_id() + ' Received %s', data)
+    rstdata = convert(data)
     publish(rstdata)
 
 
