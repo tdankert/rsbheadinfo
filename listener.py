@@ -5,6 +5,7 @@ import logging
 import rospy
 from std_msgs.msg import String
 from people_msgs.msg import Person
+from people_msgs.msg import People
 
 import rsb
 import rst
@@ -15,8 +16,7 @@ from rsb.converter import ProtocolBufferConverter, registerGlobalConverter
 
 def convert(rosdata):
 
-    msg = Person()
-    msg.name = "Patrick"
+    person_msg = rosdata.people[0]
 
     headobj = HeadObject()
 
@@ -32,9 +32,11 @@ def convert(rosdata):
     headobj.pose.z = 0
 
     #optional
-    headobj.position.x = 7
-    headobj.position.y = 8
-    headobj.position.z = 9
+    personinfo = person_msg.name
+    #gender:age
+    headobj.position.x = person_msg.position.x
+    headobj.position.y = person_msg.position.y
+    headobj.position.z = person_msg.position.z
 
     return headobj
 
@@ -49,7 +51,7 @@ def callback(data):
 
 def ros_listen():
     rospy.init_node('poselistener', anonymous=True)
-    rospy.Subscriber('rsbconverter', String, callback)
+    rospy.Subscriber('/clf_detect_dlib_faces/people', People, callback)
     rospy.spin()
 
 if __name__ == '__main__':
