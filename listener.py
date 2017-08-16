@@ -20,23 +20,30 @@ def convert(rosdata):
 
     headobj = HeadObject()
 
-    #head bounding box (required)
-    headobj.region.top_left.x = 1
-    headobj.region.top_left.y = 2
-    headobj.region.width = 3
-    headobj.region.height = 4
+    #head bounding box
+    #headobj.region.top_left.x = 1
+    #headobj.region.top_left.y = 2
+    #headobj.region.width = 3
+    #headobj.region.height = 4
 
-    #head pan/tilt (required)
-    headobj.pose.x = 5
-    headobj.pose.y = 6
-    headobj.pose.z = 0
+    #head pan/tilt
+    #headobj.pose.x = 5
+    #headobj.pose.y = 6
+    #headobj.pose.z = 0
 
-    #optional
-    personinfo = person_msg.name
-    #gender:age
+    #head position
     headobj.position.x = person_msg.position.x
     headobj.position.y = person_msg.position.y
     headobj.position.z = person_msg.position.z
+
+    #gender, age
+    personinfo = person_msg.name.split(":")
+
+    gender = personinfo[0]
+    age = personinfo[1]
+
+    headobj.gender.decided_class = gender
+    headobj.age.decided_class = age
 
     return headobj
 
