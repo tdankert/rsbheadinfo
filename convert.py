@@ -51,8 +51,8 @@ def convert(rosdata):
         headobj.position.z = float(person_info[2])
 
         #head orientation
-        headobj.pose.x = float(person_info[3])
-        headobj.pose.y = float(person_info[4])
+        headobj.pose.x = float(math.radians(person_info[3]))
+        headobj.pose.y = float(math.radians(person_info[4]))
         headobj.pose.z = 0
 
     except Exception, e:
