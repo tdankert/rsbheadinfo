@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import logging
+import math
 
 import rospy
 from std_msgs.msg import String
@@ -51,8 +52,8 @@ def convert(rosdata):
         headobj.position.z = float(person_info[2])
 
         #head orientation
-        headobj.pose.x = float(math.radians(person_info[3]))
-        headobj.pose.y = float(math.radians(person_info[4]))
+        headobj.pose.x = math.radians(float(person_info[3]))
+        headobj.pose.y = math.radians(float(person_info[4]))
         headobj.pose.z = 0
 
     except Exception, e:
