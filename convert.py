@@ -31,16 +31,6 @@ def convert(rosdata):
     #headobj.pose.y = 6
     #headobj.pose.z = 0
 
-    #head position
-    headobj.position.x = float(person_info[0])
-    headobj.position.y = float(person_info[1])
-    headobj.position.z = float(person_info[2])
-
-    headobj.pose.x = float(person_info[3])
-    headobj.pose.y = float(person_info[4])
-    headobj.pose.z = 0
-
-
     #headobj.position.y = person_msg.position.y
     #headobj.position.z = person_msg.position.z
 
@@ -52,6 +42,22 @@ def convert(rosdata):
 
     #headobj.gender.decided_class = gender
     #headobj.age.decided_class = age
+
+
+    try:
+        #head position
+        headobj.position.x = float(person_info[0])
+        headobj.position.y = float(person_info[1])
+        headobj.position.z = float(person_info[2])
+
+        #head orientation
+        headobj.pose.x = float(person_info[3])
+        headobj.pose.y = float(person_info[4])
+        headobj.pose.z = 0
+
+    except Exception, e:
+        print "Error parsing head positino or gaze directions:"
+        print str(e)
 
     return headobj
 
