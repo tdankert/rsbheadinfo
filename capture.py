@@ -22,9 +22,13 @@ photoCaptureProxy.halfPress()
 
 print("reading images")
 start = time.time()
-for img in range(10000):
+img = 0
+while True:
     photoCaptureProxy.takePicture("/tmp/", "current")
+    img += 1
     if img % 100 == 0:
         end = time.time()
-        print("took 100 pictures in " + (end - start) + "s")
+        dur = end - start
+        fps = 100/dur
+        print("took 100 pictures in " + str(dur) + "s (" + str(fps) + "fps)")
         start = end
