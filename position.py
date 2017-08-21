@@ -1,8 +1,3 @@
-#! /usr/bin/env python
-# -*- encoding: UTF-8 -*-
-
-"""Example: Use explore method."""
-
 import qi
 import argparse
 import sys
@@ -20,7 +15,7 @@ def main(session):
     map_height = result_map[2]
     orig_offset = result_map[3]
     map_data = result_map[4]
-   
+
     print("meters per pixel: " + str(mpp))
     print("map width: " + str(map_width))
     print("map height: " + str(map_height))
@@ -33,24 +28,24 @@ def main(session):
     disp = Image.frombuffer('L',  (map_width, map_height), img, 'raw', 'L', 0, 1)
     disp = disp.convert("RGB")
     hist = collections.deque(maxlen=10)
-    
+
     scale = 5
     i = 0
     while True:
-        
+
         robot_position = navigation_service.getRobotPositionInMap()
         robot_x = int((robot_position[0][0] / mpp) - orig_offset[0] / mpp)
         robot_y = int((robot_position[0][1] / mpp) + orig_offset[1] / mpp)
-        
+
         rpos=(robot_x, robot_y)
-        
+
         hist.append(rpos)
-    
+
         print(str(robot_position[0]) + " -> " + str(rpos))
 
         buf = disp.copy()
         buf = buf.transpose(Image.ROTATE_180)
-        
+
         for i in range(len(hist)):
             r = hist[i]
             if i == len(hist) - 1:
@@ -65,15 +60,15 @@ def main(session):
             buf.putpixel((r[0], r[1]), mid)
             buf.putpixel((r[0] + 1, r[1]), col)
             buf.putpixel((r[0], r[1] + 1), col)
-            
-        
+
+
         buf = buf.resize((map_width * scale, map_height * scale))
         buf.save("/tmp/pos.jpg")
         #buf.show()
         time.sleep(2)
         i = i + 1
         i = i % 10
-    
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
