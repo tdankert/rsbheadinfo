@@ -16,7 +16,7 @@ from rsb.converter import ProtocolBufferConverter, registerGlobalConverter
 
 def convert(rosdata):
 
-    person_msg = rosdata.people[0]
+    person_info = rosdata.data.split(":")
 
     headobj = HeadObject()
 
@@ -32,18 +32,26 @@ def convert(rosdata):
     #headobj.pose.z = 0
 
     #head position
-    headobj.position.x = person_msg.position.x
-    headobj.position.y = person_msg.position.y
-    headobj.position.z = person_msg.position.z
+    headobj.position.x = float(person_info[0])
+    headobj.position.y = float(person_info[1])
+    headobj.position.z = float(person_info[2])
+
+    headobj.pose.x = float(person_info[3])
+    headobj.pose.y = float(person_info[4])
+    headobj.pose.z = 0
+
+
+    #headobj.position.y = person_msg.position.y
+    #headobj.position.z = person_msg.position.z
 
     #gender, age
-    personinfo = person_msg.name.split(":")
+    #personinfo = person_msg.name.split(":")
 
-    gender = personinfo[0]
-    age = personinfo[1]
+    #gender = personinfo[0]
+    #age = personinfo[1]
 
-    headobj.gender.decided_class = gender
-    headobj.age.decided_class = age
+    #headobj.gender.decided_class = gender
+    #headobj.age.decided_class = age
 
     return headobj
 
@@ -58,7 +66,7 @@ def callback(data):
 
 def ros_listen():
     rospy.init_node('poselistener', anonymous=True)
-    rospy.Subscriber('/clf_detect_dlib_faces/people', People, callback)
+    rospy.Subscriber('/some/topic', String, callback)
     rospy.spin()
 
 if __name__ == '__main__':
