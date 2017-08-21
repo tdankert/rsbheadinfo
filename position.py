@@ -64,7 +64,6 @@ def main(session):
 
         buf = buf.resize((map_width * scale, map_height * scale))
         buf.save("/tmp/pos.jpg")
-        #buf.show()
         time.sleep(2)
         i = i + 1
         i = i % 10
