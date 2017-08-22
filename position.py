@@ -39,6 +39,9 @@ def main(session):
         robot_x = int((robot_position[0][0] / mpp) - orig_offset[0] / mpp)
         robot_y = int((robot_position[0][1] / mpp) + orig_offset[1] / mpp)
 
+        unc_x = int((robot_position[1][0] / mpp) - orig_offset[0] / mpp)
+        unc_y = int((robot_position[1][1] / mpp) + orig_offset[1] / mpp)
+
         rpos=(robot_x, robot_y)
         print(str(robot_position[0]) + " -> " + str(rpos))
 
@@ -55,11 +58,11 @@ def main(session):
             if i == len(hist) - 1:
                 col = (0,255,0)
                 mid = (0, 0, 0)
-                buf.putpixel((r[0], r[1] - 1), col)
-                buf.putpixel((r[0] - 1, r[1]), col)
+                buf.putpixel((r[0], r[1] - unc_y), col)
+                buf.putpixel((r[0] - unc_x, r[1]), col)
                 buf.putpixel((r[0], r[1]), mid)
-                buf.putpixel((r[0] + 1, r[1]), col)
-                buf.putpixel((r[0], r[1] + 1), col)
+                buf.putpixel((r[0] + unc_x, r[1]), col)
+                buf.putpixel((r[0], r[1] + unc_y), col)
             else:
                 buf.putpixel((r[0], r[1]), (50, 150, 50))
 
