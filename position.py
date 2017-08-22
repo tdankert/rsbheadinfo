@@ -9,10 +9,15 @@ import time
 import collections
 
 
-def postopixel(pos, offset, mpps):
+def postopixel(pos, offset, mpp):
     return (int(pos[0] / mpp - offset[0] / mpp), int(pos[1]  / mpp + offset[1] / mpp))
 
-def colorize(buf, pixel, color):
+def draw_cross(buf, p, c, d):
+    buf.putpixel((p[0], max(0, min(d[1], p[1] - p[3]))), c[1])
+    buf.putpixel((max(0, min(d[0], p[0] - p[2])), p[1]), c[1])
+    buf.putpixel((p[0], p[1]), c[0])
+    buf.putpixel((p[0], max(0, min(d[1], p[1] + p[3]))), c[1])
+    buf.putpixel((max(0, min(d[0], p[0] + p[2])), p[1]), c[1])
 
 
 
@@ -41,8 +46,11 @@ def main(session):
 
 
     intro = postopixel((-1.5, -0.5), orig_offset, mpp)
-    tumba = (int(1.5  / mpp - orig_offset[0] / mpp), int(0.2  / mpp + orig_offset[1] / mpp))
-    stein = (int(1.5  / mpp - orig_offset[0] / mpp), int(-2.5  / mpp + orig_offset[1] / mpp))
+    tumba = postopixel((1.5, 0.2), orig_offset, mpp)
+    stein = postopixel((1.5, -2.5), orig_offset, mpp)
+    intro = (intro[0], intro[1], 1, 1)
+    tumba = (tumba[0], tumba[1], 1, 1)
+    stein = (stein[0], stein[1], 1, 1)
 
     print(intro)
     scale = 5
@@ -50,13 +58,9 @@ def main(session):
     while True:
 
         robot_position = navigation_service.getRobotPositionInMap()
-        robot_x = int((robot_position[0][0] / mpp) - orig_offset[0] / mpp)
-        robot_y = int((robot_position[0][1] / mpp) + orig_offset[1] / mpp)
-
-        unc_x = int((robot_position[1][0] / mpp))
-        unc_y = int((robot_position[1][1] / mpp))
-
-        rpos=(robot_x, robot_y, unc_x, unc_y)
+        rob = postopixel(robot_position[0], orig_offset, mpp)
+        unc = postopixel(robot_position[1], (0,0), mpp)
+        rpos = (rob[0], rob[1], unc[0], unc[1])
         print(str(robot_position) + " -> " + str(rpos))
 
         if len(hist) == 0 or rpos != hist[len(hist) - 1]:
@@ -65,9 +69,11 @@ def main(session):
             print("robot didn't move")
 
         buf = disp.copy()
-        buf.putpixel(intro, (255, 0, 0))
-        buf.putpixel(tumba, (0, 0, 255))
-        buf.putpixel(stein, (255, 255, 0))
+
+        mid = (0, 0, 0)
+        draw_cross(buf, intro, (mid, (255,0,0)), (map_width, map_height))
+        draw_cross(buf, tumba, (mid, (0,0,255)), (map_width, map_height))
+        draw_cross(buf, stein, (mid, (255,255,0)), (map_width, map_height))
         #buf = buf.transpose(Image.ROTATE_180)
 
         for i in range(len(hist)):
@@ -75,12 +81,7 @@ def main(session):
             if i == len(hist) - 1:
                 col = (0,255,0)
                 mid = (0, 0, 0)
-
-                buf.putpixel((r[0], max(0, min(map_height, r[1] - unc_y))), col)
-                buf.putpixel((max(0, min(map_width, r[0] - unc_x)), r[1]), col)
-                buf.putpixel((r[0], r[1]), mid)
-                buf.putpixel((r[0], max(0, min(map_height, r[1] + unc_y))), col)
-                buf.putpixel((max(0, min(map_width, r[0] + unc_x)), r[1]), col)
+                draw_cross(buf, r, (mid, col), (map_width, map_height))
             else:
                 buf.putpixel((r[0], r[1]), (20, 100, 20))
 
