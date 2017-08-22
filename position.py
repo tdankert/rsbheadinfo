@@ -46,6 +46,8 @@ def main(session):
             hist.append(rpos)
         else:
             print("ignored same position as last value:")
+            print("rx: " + str(robot_x) + " == " + str(hist[len(hist) - 1][0]))
+            print("ry: " + str(robot_y) + " == " + str(hist[len(hist) - 1][1]))
             print(hist)
 
 
