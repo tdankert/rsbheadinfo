@@ -42,7 +42,7 @@ def main(session):
         rpos=(robot_x, robot_y)
         print(str(robot_position[0]) + " -> " + str(rpos))
 
-        if len(hist) == 0 or (robot_x != hist[len(hist) - 1][0] and robot_y != hist[len(hist) - 1][1]):
+        if len(hist) == 0 or robot_x != hist[len(hist) - 1][0] or robot_y != hist[len(hist) - 1][1]:
             hist.append(rpos)
         else:
             print("ignored same position as last value:")
