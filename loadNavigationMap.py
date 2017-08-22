@@ -14,8 +14,8 @@ def main(session):
     guess = [0.,0.]
     navigation_service.relocalizeInMap(guess)
 
-if __name__ == "__main__"
-    parser = argpase.ArgumentParser()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
     parser.add_argument("--ip", type=str, default="pepper.local",
                         help="Robot IP Address")
     parser.add_argument("--port", type=str, default=9559,
