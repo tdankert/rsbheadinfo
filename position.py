@@ -8,6 +8,14 @@ import Image
 import time
 import collections
 
+
+def postopixel(pos, offset, mpps):
+    return (int(pos[0] / mpp - offset[0] / mpp), int(pos[1]  / mpp + offset[1] / mpp))
+
+def colorize(buf, pixel, color):
+
+
+
 def main(session):
 
     navigation_service = session.service("ALNavigation")
@@ -32,7 +40,7 @@ def main(session):
     hist = collections.deque(maxlen=15)
 
 
-    intro = (int(-1.5  / mpp - orig_offset[0] / mpp), int(-0.5  / mpp + orig_offset[1] / mpp))
+    intro = postopixel((-1.5, -0.5), orig_offset, mpp)
     tumba = (int(1.5  / mpp - orig_offset[0] / mpp), int(0.2  / mpp + orig_offset[1] / mpp))
     stein = (int(1.5  / mpp - orig_offset[0] / mpp), int(-2.5  / mpp + orig_offset[1] / mpp))
 
