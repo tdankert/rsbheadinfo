@@ -39,8 +39,8 @@ def main(session):
         robot_x = int((robot_position[0][0] / mpp) - orig_offset[0] / mpp)
         robot_y = int((robot_position[0][1] / mpp) + orig_offset[1] / mpp)
 
-        unc_x = int((robot_position[1][0] / mpp) - orig_offset[0] / mpp)
-        unc_y = int((robot_position[1][1] / mpp) + orig_offset[1] / mpp)
+        unc_x = int((robot_position[1][0] / mpp))
+        unc_y = int((robot_position[1][1] / mpp))
 
         rpos=(robot_x, robot_y)
         print(str(robot_position[0]) + " -> " + str(rpos))
