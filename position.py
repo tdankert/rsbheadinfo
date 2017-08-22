@@ -61,7 +61,7 @@ def main(session):
                 buf.putpixel((r[0] + 1, r[1]), col)
                 buf.putpixel((r[0], r[1] + 1), col)
             else:
-                buf.putpixel((r[0], r[1]), (150, 200, 150))
+                buf.putpixel((r[0], r[1]), (150, 255, 150))
 
 
         buf = buf.resize((map_width * scale, map_height * scale))
