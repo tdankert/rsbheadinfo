@@ -55,15 +55,13 @@ def main(session):
             if i == len(hist) - 1:
                 col = (0,255,0)
                 mid = (0, 0, 0)
+                buf.putpixel((r[0], r[1] - 1), col)
+                buf.putpixel((r[0] - 1, r[1]), col)
+                buf.putpixel((r[0], r[1]), mid)
+                buf.putpixel((r[0] + 1, r[1]), col)
+                buf.putpixel((r[0], r[1] + 1), col)
             else:
-                 col = (200,255,200)
-                 mid = (180,180,180)
-
-            buf.putpixel((r[0], r[1] - 1), col)
-            buf.putpixel((r[0] - 1, r[1]), col)
-            buf.putpixel((r[0], r[1]), mid)
-            buf.putpixel((r[0] + 1, r[1]), col)
-            buf.putpixel((r[0], r[1] + 1), col)
+                buf.putpixel((r[0], r[1]), (100, 100, 100))
 
 
         buf = buf.resize((map_width * scale, map_height * scale))
