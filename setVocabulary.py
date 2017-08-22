@@ -7,7 +7,7 @@ import sys
 
 def main(session):
     asr_service = session.service("ALSpeechRecognition")
-    asr_service.setVocabulary({"Ja","Nein","Schwert","Schild"})
+    asr_service.setVocabulary(["Ja","Nein","Schwert","Schild"])
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
