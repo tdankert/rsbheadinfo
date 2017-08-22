@@ -32,9 +32,9 @@ def main(session):
     hist = collections.deque(maxlen=15)
 
 
-    intro = (-1.5, -0.5)
-    tumba = (1.5, 0.2)
-    stein = (1.5, -2.5)
+    intro = (int(-1.5  / mpp - orig_offset[0] / mpp), int(-0.5  / mpp - orig_offset[1] / mpp))
+    tumba = (int(1.5  / mpp - orig_offset[0] / mpp), int(0.2  / mpp - orig_offset[1] / mpp))
+    stein = (int(1.5  / mpp - orig_offset[0] / mpp), int(-2.5  / mpp - orig_offset[1] / mpp))
 
     scale = 5
     i = 0
