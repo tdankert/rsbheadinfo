@@ -44,7 +44,7 @@ def main(session):
 
         if robot_x != hist[len(hist) - 1][0] and robot_y != hist[len(hist) - 1][1]:
             hist.append(rpos)
-        else
+        else:
             print("ignored same position as last value")
 
 
