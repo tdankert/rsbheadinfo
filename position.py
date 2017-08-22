@@ -32,10 +32,11 @@ def main(session):
     hist = collections.deque(maxlen=15)
 
 
-    intro = (int(-1.5  / mpp - orig_offset[0] / mpp), int(-0.5  / mpp - orig_offset[1] / mpp))
-    tumba = (int(1.5  / mpp - orig_offset[0] / mpp), int(0.2  / mpp - orig_offset[1] / mpp))
-    stein = (int(1.5  / mpp - orig_offset[0] / mpp), int(-2.5  / mpp - orig_offset[1] / mpp))
+    intro = (int(-1.5  / mpp - orig_offset[0] / mpp), int(-0.5  / mpp + orig_offset[1] / mpp))
+    tumba = (int(1.5  / mpp - orig_offset[0] / mpp), int(0.2  / mpp + orig_offset[1] / mpp))
+    stein = (int(1.5  / mpp - orig_offset[0] / mpp), int(-2.5  / mpp + orig_offset[1] / mpp))
 
+    print(intro)
     scale = 5
     i = 0
     while True:
@@ -57,8 +58,8 @@ def main(session):
 
         buf = disp.copy()
         buf.putpixel(intro, (255, 0, 0))
-        buf.putpixel(tumba, (255, 0, 0))
-        buf.putpixel(stein, (255, 0, 0))
+        buf.putpixel(tumba, (0, 0, 255))
+        buf.putpixel(stein, (255, 255, 0))
         #buf = buf.transpose(Image.ROTATE_180)
 
         for i in range(len(hist)):
