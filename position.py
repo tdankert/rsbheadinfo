@@ -28,7 +28,6 @@ def checkdim(px, dim, n):
         px = dim - 1
     return int(px)
 
-
 def draw_cross(buf, p, c, d):
     buf.putpixel(checkdims((p[0], p[1] - p[3]), d), c[1])
     buf.putpixel(checkdims((p[0] - p[2], p[1]), d), c[1])
