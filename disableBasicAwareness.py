@@ -5,11 +5,21 @@ import qi
 import argparse
 import sys
 
+'''
+
+'''
+
 def main(session):
-    asr_service = session.service("ALSpeechRecognition")
-    tts_service = session.service("ALTextToSpeech")
-    asr_service.setVocabulary(["Ja","Nein","Schwert","Schild"], False)
-    tts_service.setLanguage("German")
+    awareness_service = session.service("ALBasicAwareness")
+    autonomousLife_service = session.service("ALAutonomousLife")
+    speakingMovement_service = session.service("ALSpeakingMovement")
+
+    autonomousLife_service.setState('disabled')
+
+    awareness_service.setTrackingMode('Head')
+    awareness_service.setEnabled(False)
+
+    speakingMovement_service.setEnabled(True)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
