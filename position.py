@@ -45,11 +45,7 @@ def main(session):
         if len(hist) == 0 or robot_x != hist[len(hist) - 1][0] or robot_y != hist[len(hist) - 1][1]:
             hist.append(rpos)
         else:
-            print("ignored same position as last value:")
-            print("rx: " + str(robot_x) + " == " + str(hist[len(hist) - 1][0]))
-            print("ry: " + str(robot_y) + " == " + str(hist[len(hist) - 1][1]))
-            print(hist)
-
+            print("robot didn't move")
 
         buf = disp.copy()
         buf = buf.transpose(Image.ROTATE_180)
