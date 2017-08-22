@@ -42,16 +42,16 @@ def main(session):
         unc_x = int((robot_position[1][0] / mpp))
         unc_y = int((robot_position[1][1] / mpp))
 
-        rpos=(robot_x, robot_y)
-        print(str(robot_position[0]) + " -> " + str(rpos))
+        rpos=(robot_x, robot_y, unc_x, unc_y)
+        print(str(robot_position) + " -> " + str(rpos))
 
-        if len(hist) == 0 or robot_x != hist[len(hist) - 1][0] or robot_y != hist[len(hist) - 1][1]:
+        if len(hist) == 0 or rpos != hist[len(hist) - 1]:
             hist.append(rpos)
         else:
             print("robot didn't move")
 
         buf = disp.copy()
-        buf = buf.transpose(Image.ROTATE_180)
+        #buf = buf.transpose(Image.ROTATE_180)
 
         for i in range(len(hist)):
             r = hist[i]
