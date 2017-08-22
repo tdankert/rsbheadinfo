@@ -64,7 +64,7 @@ def main(session):
                 buf.putpixel((math.max(0, math.min(map_width, r[0] - unc_x)), r[1]), col)
                 buf.putpixel((r[0], r[1]), mid)
                 buf.putpixel((r[0], math.max(0, math.min(map_height, r[1] + unc_y))), col)
-                buf.putpixel(((math.max(0, math.min(map_width, r[0] + unc_x)), r[1]), col)
+                buf.putpixel((math.max(0, math.min(map_width, r[0] + unc_x)), r[1]), col)
             else:
                 buf.putpixel((r[0], r[1]), (20, 100, 20))
 
