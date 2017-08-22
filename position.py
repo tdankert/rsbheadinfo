@@ -29,7 +29,7 @@ def main(session):
     img = numpy.array(img, numpy.uint8)
     disp = Image.frombuffer('L',  (map_width, map_height), img, 'raw', 'L', 0, 1)
     disp = disp.convert("RGB")
-    hist = collections.deque(maxlen=10)
+    hist = collections.deque(maxlen=15)
 
     scale = 5
     i = 0
