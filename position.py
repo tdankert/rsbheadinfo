@@ -31,6 +31,11 @@ def main(session):
     disp = disp.convert("RGB")
     hist = collections.deque(maxlen=15)
 
+
+    intro = (-1.5, -0.5)
+    tumba = (1.5, 0.2)
+    stein = (1.5, -2.5)
+
     scale = 5
     i = 0
     while True:
@@ -51,6 +56,9 @@ def main(session):
             print("robot didn't move")
 
         buf = disp.copy()
+        buf.putpixel(intro, (255, 0, 0))
+        buf.putpixel(tumba, (255, 0, 0))
+        buf.putpixel(stein, (255, 0, 0))
         #buf = buf.transpose(Image.ROTATE_180)
 
         for i in range(len(hist)):
