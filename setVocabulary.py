@@ -8,7 +8,7 @@ import sys
 def main(session):
     asr_service = session.service("ALSpeechRecognition")
     tts_service = session.service("ALTextToSpeech")
-    asr_service.setVocabulary({"Ja","Nein","Schwert","Schild"])
+    asr_service.setVocabulary(["Ja","Nein","Schwert","Schild"], False)
     tts_service.setLanguage("German")
 
 if __name__ == "__main__":
